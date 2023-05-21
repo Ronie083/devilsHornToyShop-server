@@ -28,6 +28,7 @@ async function run() {
         await client.connect();
 
         const allToysCat = client.db('devilsHornToys').collection('alltoys');
+        const newAddedToy =  client.db('devilsHornToys').collection('addedToy');
 
         app.get('/alltoys', async (req, res) => {
             const cursor = allToysCat.find();
@@ -44,6 +45,13 @@ async function run() {
             const result = await allToysCat.findOne(query, options);
             res.send(result);
         })
+
+        app.post('/addedtoy', async(req, res) => {
+            const addedToy = req.body;
+            console.log(addedToy);
+            const result = await newAddedToy.insertOne(addedToy);
+            res.send(result);
+        });
 
 
         // Send a ping to confirm a successful connection
