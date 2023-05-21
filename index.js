@@ -46,12 +46,25 @@ async function run() {
             res.send(result);
         })
 
+        app.get('/addedtoy', async(req, res) =>{
+            console.log(req.query.sellerEmail);
+            let query ={};
+            if(req.query?.sellerEmail){
+                query = {sellerEmail: req.query.sellerEmail}
+            }
+            const result = await newAddedToy.find().toArray();
+            res.send(result);
+
+        })
+
         app.post('/addedtoy', async(req, res) => {
             const addedToy = req.body;
             console.log(addedToy);
             const result = await newAddedToy.insertOne(addedToy);
             res.send(result);
         });
+
+
 
 
         // Send a ping to confirm a successful connection
