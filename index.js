@@ -64,11 +64,21 @@ async function run() {
             res.send(result);
         });
 
+        app.get('/addedtoy/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: new ObjectId(id) };
+            const result = await newAddedToy.findOne(query);
+            res.send([result]); // Wrap the result in an array
+          });
+          
+          
+
         app.put('/addedtoy/:id', async(req, res) =>{
             const id = req.params.id;
             const editToyInfo = req.body;
             console.log(editToyInfo);
         })
+
 
         app.delete('/addedtoy/:id', async(req, res) =>{
             const id = req.params.id;
