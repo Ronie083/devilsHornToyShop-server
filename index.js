@@ -64,6 +64,19 @@ async function run() {
             res.send(result);
         });
 
+        app.put('/addedtoy/:id', async(req, res) =>{
+            const id = req.params.id;
+            const editToyInfo = req.body;
+            console.log(editToyInfo);
+        })
+
+        app.delete('/addedtoy/:id', async(req, res) =>{
+            const id = req.params.id;
+            const query = {_id: new ObjectId(id)}
+            const result = await newAddedToy.deleteOne(query);
+            res.send(result);
+        })
+
 
 
 
